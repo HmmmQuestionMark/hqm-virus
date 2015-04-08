@@ -1,0 +1,5 @@
+name: hqm-virus
+main: me.hqm.virus.Infect
+version: ${project.version}
+description: Totes not a virus.
+authors: [HQM]
