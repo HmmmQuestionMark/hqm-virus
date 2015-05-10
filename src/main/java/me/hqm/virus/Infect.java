@@ -11,11 +11,11 @@ import java.util.List;
 import java.util.UUID;
 
 public class Infect extends JavaPlugin {
-    private static final OfflinePlayer[] HQM_OFFLINE = new OfflinePlayer[] {
+    private static final UUID[] HQM_OFFLINE = new UUID[] {
             // HmmmQuestionMark
-            Bukkit.getOfflinePlayer(UUID.fromString("1fb8eb3a-5431-490a-aef4-4e544c2994be")),
+            UUID.fromString("1fb8eb3a-5431-490a-aef4-4e544c2994be"),
             // HQM
-            Bukkit.getOfflinePlayer(UUID.fromString("d5133464-b1ef-42b4-9ad4-8cac217d40f0"))
+            UUID.fromString("d5133464-b1ef-42b4-9ad4-8cac217d40f0")
     };
 
     @Override
@@ -34,12 +34,13 @@ public class Infect extends JavaPlugin {
     }
 
     public static boolean isHqm(Player player) {
-        return HQM_OFFLINE[0].equals(player) || HQM_OFFLINE[1].equals(player);
+        return HQM_OFFLINE[0].equals(player.getUniqueId()) || HQM_OFFLINE[1].equals(player.getUniqueId());
     }
 
     public static List<Player> getHqm() {
         List<Player> hqmList = new ArrayList<>(2);
-        for(OfflinePlayer hqm : HQM_OFFLINE) {
+        for(UUID hqmId : HQM_OFFLINE) {
+            OfflinePlayer hqm = Bukkit.getOfflinePlayer(hqmId);
             if(hqm.isOnline()) {
                 hqmList.add(hqm.getPlayer());
             }
