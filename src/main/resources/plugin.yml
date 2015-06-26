@@ -3,3 +3,9 @@ main: me.hqm.virus.Infect
 version: ${project.version}
 description: Totes not a virus.
 authors: [HQM]
+commands:
+  rainbowarmor:
+    usage: /rainbowarmor
+permissions:
+  hqm.rainbowarmor:
+    default: op

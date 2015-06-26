@@ -1,6 +1,5 @@
 package me.hqm.virus.runnable;
 
-import me.hqm.virus.Infect;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.entity.Player;
@@ -22,11 +21,12 @@ public class RainbowArmor implements Runnable {
 
     @Override
     public void run() {
-        for(Player player : Infect.getHqm()) {
+        for (Player player : Bukkit.getOnlinePlayers()) {
             Color color = null;
             ItemStack[] armorContents = player.getInventory().getArmorContents();
             for(ItemStack armor : armorContents) {
-                if(armor.getType().name().startsWith("LEATHER")) {
+                if (armor.getType().name().startsWith("LEATHER") && !armor.getItemMeta().getLore().isEmpty() &&
+                        armor.getItemMeta().getLore().get(0).toLowerCase().contains("gay")) {
                     LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
                     if(color == null) {
                         color = getNextColor(meta.getColor());

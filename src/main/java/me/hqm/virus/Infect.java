@@ -1,5 +1,6 @@
 package me.hqm.virus;
 
+import me.hqm.virus.command.RainbowArmorCommand;
 import me.hqm.virus.runnable.RainbowArmor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -22,6 +23,9 @@ public class Infect extends JavaPlugin {
     public void onEnable() {
         // Register the runnables
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new RainbowArmor(), 1, 1);
+
+        // Regiser the commands
+        getCommand("rainbowarmor").setExecutor(new RainbowArmorCommand());
 
         // Let the console know it is infected
         getLogger().info("Infection complete.");
