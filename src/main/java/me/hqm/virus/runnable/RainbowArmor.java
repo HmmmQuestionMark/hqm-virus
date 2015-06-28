@@ -2,18 +2,19 @@ package me.hqm.virus.runnable;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
-import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RainbowArmor implements Runnable {
     private static final List<Color> BUKKIT_COLOR_ORDER = new ArrayList<>();
+    private static Color COLOR;
 
     static {
-        for(float i = 0F; i < 1F; i+=0.0027777777777778F) {
+        for (float i = 0F; i < 1F; i += 0.0027777777777778F) {
             java.awt.Color color = java.awt.Color.getHSBColor(i, 1F, 1F);
             BUKKIT_COLOR_ORDER.add(org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue()));
         }
@@ -21,21 +22,22 @@ public class RainbowArmor implements Runnable {
 
     @Override
     public void run() {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            Color color = null;
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            COLOR = null;
             ItemStack[] armorContents = player.getInventory().getArmorContents();
-            for(ItemStack armor : armorContents) {
-                if (armor.getType().name().startsWith("LEATHER") && !armor.getItemMeta().getLore().isEmpty() &&
-                        armor.getItemMeta().getLore().get(0).toLowerCase().contains("gay")) {
-                    LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
-                    if(color == null) {
-                        color = getNextColor(meta.getColor());
-                    }
-                    meta.setColor(color);
-                    armor.setItemMeta(meta);
-                }
-            }
-        }
+            Arrays.asList(armorContents).stream().filter(armor -> armor.getType().name().startsWith("LEATHER")).
+                    forEach(armor -> {
+                        LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
+                        List<String> lore = meta.getLore();
+                        if (!lore.isEmpty() && lore.get(0).toLowerCase().contains("gay")) {
+                            if (COLOR == null) {
+                                COLOR = getNextColor(meta.getColor());
+                            }
+                            meta.setColor(COLOR);
+                            armor.setItemMeta(meta);
+                        }
+                    });
+        });
     }
 
     public Color getNextColor(Color color) {

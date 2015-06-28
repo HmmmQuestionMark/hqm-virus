@@ -20,7 +20,7 @@ public class RainbowArmorCommand implements CommandExecutor {
         GAY_ARMOR[0] = new ItemStack(Material.LEATHER_HELMET);
         ItemMeta hatMeta = GAY_ARMOR[0].getItemMeta();
         hatMeta.setDisplayName("Gay Helmet");
-        hatMeta.setLore(Collections.singletonList("This hat is gay as fuck."));
+        hatMeta.setLore(Collections.singletonList("This hat is gay as f*ck."));
         GAY_ARMOR[0].setItemMeta(hatMeta);
 
         GAY_ARMOR[1] = new ItemStack(Material.LEATHER_CHESTPLATE);
@@ -50,6 +50,7 @@ public class RainbowArmorCommand implements CommandExecutor {
                 Inventory inventory = player.getInventory();
                 inventory.addItem(GAY_ARMOR[0], GAY_ARMOR[1], GAY_ARMOR[2], GAY_ARMOR[3]);
                 sender.sendMessage(ChatColor.YELLOW + "Gay armor added to inventory.");
+                return true;
             } else {
                 sender.sendMessage(ChatColor.RED + "You don't have permission to do that.");
                 return true;
