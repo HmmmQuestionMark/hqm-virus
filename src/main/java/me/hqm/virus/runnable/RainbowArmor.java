@@ -24,19 +24,22 @@ public class RainbowArmor implements Runnable {
     public void run() {
         Bukkit.getOnlinePlayers().forEach(player -> {
             COLOR = null;
-            ItemStack[] armorContents = player.getInventory().getArmorContents();
-            Arrays.asList(armorContents).stream().filter(armor -> armor.getType().name().startsWith("LEATHER")).
-                    forEach(armor -> {
-                        LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
-                        List<String> lore = meta.getLore();
-                        if (!lore.isEmpty() && lore.get(0).toLowerCase().contains("gay")) {
-                            if (COLOR == null) {
-                                COLOR = getNextColor(meta.getColor());
+            try {
+                ItemStack[] armorContents = player.getInventory().getArmorContents();
+                Arrays.asList(armorContents).stream().filter(armor -> armor.getType().name().startsWith("LEATHER")).
+                        forEach(armor -> {
+                            LeatherArmorMeta meta = (LeatherArmorMeta) armor.getItemMeta();
+                            List<String> lore = meta.getLore();
+                            if (!lore.isEmpty() && lore.get(0).toLowerCase().contains("gay")) {
+                                if (COLOR == null) {
+                                    COLOR = getNextColor(meta.getColor());
+                                }
+                                meta.setColor(COLOR);
+                                armor.setItemMeta(meta);
                             }
-                            meta.setColor(COLOR);
-                            armor.setItemMeta(meta);
-                        }
-                    });
+                        });
+            } catch (Exception ignored) {
+            }
         });
     }
 

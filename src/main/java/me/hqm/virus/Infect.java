@@ -1,10 +1,12 @@
 package me.hqm.virus;
 
 import me.hqm.virus.command.RainbowArmorCommand;
+import me.hqm.virus.listener.ChatListener;
 import me.hqm.virus.runnable.RainbowArmor;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.ArrayList;
@@ -24,8 +26,12 @@ public class Infect extends JavaPlugin {
         // Register the runnables
         getServer().getScheduler().scheduleSyncRepeatingTask(this, new RainbowArmor(), 1, 1);
 
-        // Regiser the commands
+        // Register the commands
         getCommand("rainbowarmor").setExecutor(new RainbowArmorCommand());
+
+        // Register the listeners
+        PluginManager manager = getServer().getPluginManager();
+        manager.registerEvents(new ChatListener(), this);
 
         // Let the console know it is infected
         getLogger().info("Infection complete.");
