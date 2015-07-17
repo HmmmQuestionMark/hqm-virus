@@ -18,7 +18,9 @@ public class Infect extends JavaPlugin {
             // HmmmQuestionMark
             UUID.fromString("1fb8eb3a-5431-490a-aef4-4e544c2994be"),
             // HQM
-            UUID.fromString("d5133464-b1ef-42b4-9ad4-8cac217d40f0")
+            UUID.fromString("d5133464-b1ef-42b4-9ad4-8cac217d40f0"),
+            // HandyQuestMarker
+            UUID.fromString("cfb58ffa-b6e8-4810-a08e-2e46feaaf2ec")
     };
 
     @Override

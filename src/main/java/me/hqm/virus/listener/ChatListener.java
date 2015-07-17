@@ -5,14 +5,27 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Pattern;
+
 public class ChatListener implements Listener {
-    @EventHandler(priority = EventPriority.HIGHEST, ignoreCancelled = true)
+    private static Map<String, String> REPLACEMENTS = new HashMap<>();
+
+    static {
+        // p4p -> Kappa
+        REPLACEMENTS.put("p4p", "Kappa");
+
+        // Nablu -> Spammer
+        REPLACEMENTS.put("Nablu", "Spammer");
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent event) {
-        String message = event.getMessage().
-                replace("p4p", "buttsex").
-                replace("P4P", "buttsex").
-                replace("p4P", "buttsex").
-                replace("P4p", "buttsex");
+        String message = event.getMessage();
+        for (Map.Entry<String, String> entry : REPLACEMENTS.entrySet()) {
+            message = message.replaceAll("(?i)" + Pattern.quote(entry.getKey()), entry.getValue());
+        }
         event.setMessage(message);
     }
 }
