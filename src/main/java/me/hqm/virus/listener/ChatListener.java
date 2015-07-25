@@ -18,6 +18,9 @@ public class ChatListener implements Listener {
 
         // Nablu -> Spammer
         REPLACEMENTS.put("Nablu", "Spammer");
+
+        // lag -> swag
+        REPLACEMENTS.put("lag", "swag");
     }
 
     @EventHandler(priority = EventPriority.LOWEST)
